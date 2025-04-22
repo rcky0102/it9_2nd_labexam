@@ -28,7 +28,13 @@ class TaskController extends Controller
             'description' => 'required',
         ]);
 
-        Task::create($request->only('title', 'description'));
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'completed' => $request->has('completed'),
+        ]);
+        
+        
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
     }
@@ -48,12 +54,19 @@ class TaskController extends Controller
     
     public function update(Request $request, Task $task)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required',
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'completed' => $request->has('completed'),
         ]);
+        
 
-        $task->update($request->only('title', 'description'));
+        $task->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'completed' => $request->boolean('completed'),
+        ]);
+        
 
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully!');
     }

@@ -19,6 +19,14 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea id="description" name="description" class="form-control" placeholder="Write your task description here..." required>{{ old('description') }}</textarea>
             </div>
+
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" name="completed" {{ old('completed') ? 'checked' : '' }}>
+                    Mark as Completed
+                </label>
+            </div>
+            
             
             <button type="submit" class="btn">Save Task</button>
         </form>

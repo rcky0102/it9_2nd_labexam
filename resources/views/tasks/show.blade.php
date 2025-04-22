@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="page-header">
+        
         <h1>{{ $task->title }}</h1>
+
         <div class="task-actions">
             <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-secondary">Edit</a>
             <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">

@@ -12,12 +12,22 @@
         </div>
     @else
         @foreach ($tasks as $task)  
-            <div class="card">
-                <h2><a href="{{ route('tasks.index', $task->id) }}" style="color: var(--gray-800); text-decoration: none; hover:text-decoration: underline;">{{ $task->title }}</a></h2>
+
+
+            <div class="card">     
+
+                <h2>
+                    {{ $task->title }}
+                    @if ($task->completed)
+                        <span style="color: var(--success); font-size: 0.9rem;">(Completed)</span>
+                    @endif
+                </h2>
+
                 <p>{{ Str::limit($task->description, 150) }}</p>
-                
+
+
                 <div class="task-actions">
-                    <!--<a href="{{ route('tasks.show', $task->id) }}" class="btn">Show Description</a>-->
+
                     <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-secondary">Edit</a>
                     <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                         @csrf
@@ -37,4 +47,5 @@
             margin-bottom: 2rem;
         }
     </style>
+    
 @endsection
